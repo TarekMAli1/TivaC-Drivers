@@ -1,5 +1,5 @@
 #ifndef LED_H
 #define LED_H
-void LED_ON(void);
-void LED_OFF(void);
+void LEDs_ON(void);
+void LEDs_OFF(void);
 #endif

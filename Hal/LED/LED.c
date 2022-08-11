@@ -1,8 +1,8 @@
 #include "Dio.h"
-void LED_ON(){
+void LEDs_ON(){
 	Dio_WritePort (High_Level);
 }
 
-void LED_OFF(){
+void LEDs_OFF(){
 	Dio_WritePort (Low_Level);
 }

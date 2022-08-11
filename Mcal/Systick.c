@@ -53,28 +53,28 @@
 void IntSystick_Init(void)
 {
 	#if (Clk_Source == 1) // mainOsc
-		RCC&=~(1<<4); 								 //select main osc mode
+		RCC&=~(1<<OSCSRC); 								 //select main osc mode
 		RCC|=0x01; 									 //enable main osc
 		extern divisor Div;					 // scalling frequency
     extern Main_Osc_Value freq ; //main osc freq
-		RCC|=	(freq<<6);
-		RCC|= (Div<<23);
+		RCC|=	(freq<<XTAL);
+		RCC|= (Div<<SYSDIV);
 		#if(PLL_Enable==1) //PLL enabled
-			RCC&=~(1<<11);	 //bypass=0
-			RCC&=~(1<<13);	 //powerdown 
+			RCC&=~(1<<BYPASS);	 //bypass=0
+			RCC&=~(1<<PWRDN);	 //powerdown 
 		#else 						 //PLL disabled
-			RCC|=(1<<11); 	 //bypass=1
-			RCC|=(1<<13);	   //pll powerdown 
+			RCC|=(1<<BYPASS); 	 //bypass=1
+			RCC|=(1<<PWRDN);	   //pll powerdown 
 		#endif
 	#else//intenalOsc
 		RCC|=(1<<4); 								 //select internalosc mode
 		#if(PLL_Enable==1) 	//PLL enabled
-			RCC&=~(1<<11);	 //bypass=0
-			RCC&=~(1<<13);	 //powerdown 
+			RCC&=~(1<<BYPASS);	 //bypass=0
+			RCC&=~(1<<PWRDN);	 //powerdown 
 		#else 							//PLL disabled
-			RCC|=(1<<11); 	 //bypass=1
-			RCC|=(1<<13);	   //pll powerdown
-			RCC|= (0<<23);
+			RCC|=(1<<BYPASS); 	 //bypass=1
+			RCC|=(1<<PWRDN);	   //pll powerdown
+			RCC|= (0<<SYSDIV);
 		#endif
 			
 	#endif
